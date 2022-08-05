@@ -10,9 +10,9 @@ generator client {
 model Match {
   id String @id @default(uuid())
 
-  rommName          String 
-  players           Player[]
+  roomName          String 
   numberOfCards     Int
+  players           Player[]
 
   createdAt DateTime    @default(now())
 }

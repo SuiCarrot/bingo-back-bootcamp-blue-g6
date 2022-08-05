@@ -1,26 +1,46 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { handleError } from 'src/utils/handle-error';
+import { notFoundError } from 'src/utils/not-found';
 import { CreateMatchDto } from './dto/create-match.dto';
-import { UpdateMatchDto } from './dto/update-match.dto';
 
 @Injectable()
 export class MatchService {
-  create(createMatchDto: CreateMatchDto) {
-    return 'This action adds a new match';
+  constructor(private readonly prisma: PrismaService) {}
+  async create(dto: CreateMatchDto) {
+
+    const data: Prisma.MatchCreateInput = {
+      roomName: dto.roomName,
+      numberOfCards: dto.numberOfCards,
+    }
+    return await this.prisma.match.create({ data }).catch(handleError)
   }
 
-  findAll() {
-    return `This action returns all match`;
+  async findAll() {
+    const list = await this.prisma.match.findMany();
+
+    if (list.length === 0) {
+      throw new NotFoundException(
+        'Não existem partidas',
+      );
+    }
+    return list;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} match`;
+  async findOne(id: string) {
+    const record = await this.prisma.match.findUnique({ where: { id } });
+
+    notFoundError(record, id);
+    return record;
   }
 
-  update(id: number, updateMatchDto: UpdateMatchDto) {
-    return `This action updates a #${id} match`;
-  }
+  async remove(id: string) {
+    await this.findOne(id);
 
-  remove(id: number) {
-    return `This action removes a #${id} match`;
+    await this.prisma.match.delete({
+      where: { id },
+    });
+    throw new HttpException('Criatura deletado com sucesso', 204);
   }
 }
