@@ -17,17 +17,6 @@ export class MatchService {
     return await this.prisma.match.create({ data }).catch(handleError)
   }
 
-  async findAll() {
-    const list = await this.prisma.match.findMany();
-
-    if (list.length === 0) {
-      throw new NotFoundException(
-        'Não existem partidas',
-      );
-    }
-    return list;
-  }
-
   async findOne(id: string) {
     const record = await this.prisma.match.findUnique({ where: { id } });
 
@@ -41,6 +30,6 @@ export class MatchService {
     await this.prisma.match.delete({
       where: { id },
     });
-    throw new HttpException('Criatura deletado com sucesso', 204);
+    throw new HttpException('Match deleted', 204);
   }
 }

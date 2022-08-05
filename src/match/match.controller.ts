@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { MatchService } from './match.service';
 import { CreateMatchDto } from './dto/create-match.dto';
-import { UpdateMatchDto } from './dto/update-match.dto';
 import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('match')
@@ -15,14 +14,6 @@ export class MatchController {
   create(
     @Body() createMatchDto: CreateMatchDto) {
     return this.matchService.create(createMatchDto);
-  }
-
-  @Get()
-  @ApiOperation({
-    summary: 'List all the matches.',
-  })
-  findAll() {
-    return this.matchService.findAll();
   }
 
   @Get(':id')
