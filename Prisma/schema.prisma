@@ -1,0 +1,28 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Match {
+  id String @id @default(uuid())
+
+  rommName          String 
+  players           Player[]
+  numberOfCards     Int
+
+  createdAt DateTime    @default(now())
+}
+
+model Player {
+  id String @id @default(uuid())
+
+  playerName    String
+  avatar        String
+  match         Match   @relation(fields:[matchId], references: [id])
+  matchId       String  @map("match_id")
+  isHost        Boolean 
+}
