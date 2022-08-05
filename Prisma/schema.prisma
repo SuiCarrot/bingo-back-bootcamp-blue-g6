@@ -15,14 +15,18 @@ model Match {
   players           Player[]
 
   createdAt DateTime    @default(now())
+
+  @@map("match")
 }
 
 model Player {
   id String @id @default(uuid())
 
   playerName    String
-  avatar        String
+  avatar        String  @map("image_url")
   match         Match   @relation(fields:[matchId], references: [id])
   matchId       String  @map("match_id")
-  isHost        Boolean 
+  isHost        Boolean @default(false) @map("is_host")
+
+  @@map("player")
 }
