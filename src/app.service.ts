@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getAppStatus(): string {
+    return `Servidor Rodando! 🚀\n\n **PARA O SWAGGER** -> ir para a rota /api`;
   }
 }
