@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { MatchService } from './match.service';
 import { CreateMatchDto } from './dto/create-match.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { UpdateMatchDto } from './dto/update-match.dto';
 
+@ApiTags('Match')
 @Controller('match')
 export class MatchController {
   constructor(private readonly matchService: MatchService) {}
@@ -22,6 +24,14 @@ export class MatchController {
   })
   findOne(@Param('id') id: string) {
     return this.matchService.findOne(id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({
+    summary: 'Edit the match with new info.',
+  })
+  update(@Param('id') id: string, @Body() dto: UpdateMatchDto) {
+    return this.matchService.update(id, dto);
   }
 
   @Delete(':id')

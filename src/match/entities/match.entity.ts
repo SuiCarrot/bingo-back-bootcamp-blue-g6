@@ -4,5 +4,9 @@ export class Match {
     id?: String;
     roomName: String;
     numberOfCards: Number;
-    players: Player[]
+    drawTime: Number;
+    numberOfRounds: Number;
+    link: String;
+    winner: String;
+    players: Player[];
 }

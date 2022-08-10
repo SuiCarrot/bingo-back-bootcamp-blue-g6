@@ -12,7 +12,13 @@ model Match {
 
   roomName          String 
   numberOfCards     Int
+  drawTime          Int
+  numberOfRounds    Int
+  link              String
+  winner            String
   players           Player[]
+  cards             Cards[]
+
 
   createdAt DateTime    @default(now())
 
@@ -24,9 +30,25 @@ model Player {
 
   playerName    String
   avatar        String  @map("image_url")
+  score         Int
   match         Match   @relation(fields:[matchId], references: [id])
   matchId       String  @map("match_id")
   isHost        Boolean @default(false) @map("is_host")
+  cards         Cards[]
+
 
   @@map("player")
+}
+
+model Cards {
+  id String @id @default(uuid())
+
+  numbers                     String
+  bingoPossibilities          String
+  match                       Match    @relation(fields:[matchId], references: [id])
+  matchId                     String   @map("match_id")
+  player                      Player   @relation(fields:[playerId], references: [id])
+  playerId                    String   @map("player_id")
+
+  @@map("cards")
 }
