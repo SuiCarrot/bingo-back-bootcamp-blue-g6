@@ -1,10 +1,10 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Match } from 'src/match/entities/match.entity';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { handleError } from 'src/utils/handle-error';
 import { notFoundError } from 'src/utils/not-found';
 import { CreatePlayerDto } from './dto/create-player.dto';
+import { UpdatePlayerDto } from './dto/update-player.dto';
 
 @Injectable()
 export class PlayerService {
@@ -14,6 +14,7 @@ export class PlayerService {
       const data: Prisma.PlayerCreateInput = {
         playerName: dto.playerName,
         avatar: dto.avatar,
+        score: dto.score,
         isHost: dto.isHost,
         match: {connect: {id: dto.matchId}}
       }
@@ -26,6 +27,25 @@ export class PlayerService {
   
       notFoundError(record, id);
       return record;
+    }
+
+    async update(id: string, dto: UpdatePlayerDto) {
+      await this.findOne(id);
+  
+      const data: Prisma.PlayerUpdateInput = {
+        playerName: dto.playerName,
+        avatar: dto.avatar,
+        score: dto.score,
+        isHost: dto.isHost,
+        match: {connect: {id: dto.matchId}}
+      };
+  
+      return this.prisma.player
+        .update({
+          where: { id },
+          data,
+        })
+        .catch(handleError);
     }
 
     async remove(id: string) {

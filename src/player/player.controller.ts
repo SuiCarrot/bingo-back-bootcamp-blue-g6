@@ -1,8 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PlayerService } from './player.service';
 import { CreatePlayerDto } from './dto/create-player.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { UpdatePlayerDto } from './dto/update-player.dto';
 
+
+@ApiTags('Players')
 @Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
@@ -21,6 +24,14 @@ export class PlayerController {
   })
   findOne(@Param('id') id: string) {
     return this.playerService.findOne(id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({
+    summary: 'Update one player with new info.',
+  })
+  update(@Param('id') id: string, @Body() dto: UpdatePlayerDto) {
+    return this.playerService.update(id, dto);
   }
 
   @Delete(':id')

@@ -6,6 +6,7 @@ export class Player {
     id?: string;
     playerName: string;
     avatar: string;
+    score: number;
+    isHost: boolean;
     match: Match[];
-    isHost: boolean
 }
