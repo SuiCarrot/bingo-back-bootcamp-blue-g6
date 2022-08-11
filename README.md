@@ -35,7 +35,7 @@ npm run start
 ## ✒️ Autores
 
 * **Bruno de Lucca** (https://github.com/SuiCarrot);
-* **Bruno Sallum** (https://github.com/B-Sallum)
+* **Eduardo Lovo** (https://github.com/EduardoLovo)
 * **João Gomes** (https://github.com/jovic03)
 * **Karen Lourenço** (https://github.com/KarenMascarenhasLourenco)
 * **Pedro Oliveira** (https://github.com/pedroasdoliveira)
