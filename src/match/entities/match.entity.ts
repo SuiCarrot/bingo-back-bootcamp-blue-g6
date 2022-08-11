@@ -6,6 +6,7 @@ export class Match {
     numberOfCards: Number;
     drawTime: Number;
     numberOfRounds: Number;
+    drawNumbers: String;
     link: String;
     winner: String;
     players: Player[];

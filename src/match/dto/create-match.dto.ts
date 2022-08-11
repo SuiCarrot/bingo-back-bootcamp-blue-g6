@@ -34,6 +34,13 @@ export class CreateMatchDto {
 
     @IsString()
     @ApiProperty({
+        description: 'Numbers already draw in this game.',
+        example: '[23,56,30,81,34]'
+    })
+    drawNumbers: string
+
+    @IsString()
+    @ApiProperty({
         description: 'Link to join the match.',
         example: '2'
     })
