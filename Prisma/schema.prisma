@@ -14,6 +14,7 @@ model Match {
   numberOfCards     Int
   drawTime          Int
   numberOfRounds    Int
+  drawNumbers       String
   link              String
   winner            String
   players           Player[]
