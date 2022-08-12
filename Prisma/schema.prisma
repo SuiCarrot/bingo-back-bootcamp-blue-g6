@@ -11,12 +11,12 @@ model Match {
   id String @id @default(uuid())
 
   roomName          String 
-  numberOfCards     Int
-  drawTime          Int
-  numberOfRounds    Int
-  drawNumbers       String
-  link              String
-  winner            String
+  numberOfCards     Int?  @default(2)
+  drawTime          Int?  @default(10)
+  numberOfRounds    Int?  @default(1)
+  drawNumbers       String?
+  link              String?
+  winner            String?
   players           Player[]
   cards             Cards[]
 
@@ -29,12 +29,12 @@ model Match {
 model Player {
   id String @id @default(uuid())
 
-  playerName    String
+  playerName    String  
   avatar        String  @map("image_url")
-  score         Int
-  match         Match   @relation(fields:[matchId], references: [id])
-  matchId       String  @map("match_id")
-  isHost        Boolean @default(false) @map("is_host")
+  score         Int?    @default(0)
+  match         Match?   @relation(fields:[matchId], references: [id])
+  matchId       String?  @map("match_id")
+  isHost        Boolean? @default(false) @map("is_host")
   cards         Cards[]
 
 
@@ -46,10 +46,10 @@ model Cards {
 
   numbers                     String
   bingoPossibilities          String
-  match                       Match    @relation(fields:[matchId], references: [id])
-  matchId                     String   @map("match_id")
-  player                      Player   @relation(fields:[playerId], references: [id])
-  playerId                    String   @map("player_id")
+  match                       Match?    @relation(fields:[matchId], references: [id])
+  matchId                     String?   @map("match_id")
+  player                      Player?   @relation(fields:[playerId], references: [id])
+  playerId                    String?   @map("player_id")
 
   @@map("cards")
 }
