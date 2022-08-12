@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString, IsUrl, IsUUID } from 'class-validator';
@@ -24,19 +25,19 @@ export class CreatePlayerDto {
         description: 'Score of the player.',
         example: '3'
     })
-    score: number
+    score?: number
     
     @ApiProperty({
         description: 'Is this player the host?',
         example: false,
       })
-    isHost: boolean;
+    isHost?: boolean;
 
     @IsUUID()
     @ApiProperty({
       description: 'ID of the match this player is in.',
       example: 'e0673bf6-a645-418f-a91e-95a60c3bf9a9',
     })
-    matchId: string;
+    matchId?: string;
 
 }
