@@ -20,3 +20,18 @@ model Player {
 
 }
 
+model Match {
+  id String @id @default(uuid())
+
+  name            String
+  numberOfCards   Int
+  drawTime        Int
+  numberOfRounds  Int
+  link            String
+  winner          String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+}
+
