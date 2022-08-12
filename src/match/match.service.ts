@@ -10,7 +10,6 @@ import { UpdateMatchDto } from './dto/update-match.dto';
 export class MatchService {
   constructor(private readonly prisma: PrismaService) {}
   async create(dto: CreateMatchDto) {
-
     const data: Prisma.MatchCreateInput = {
       roomName: dto.roomName,
       numberOfCards: dto.numberOfCards,
@@ -18,8 +17,9 @@ export class MatchService {
       numberOfRounds: dto.numberOfCards,
       link: dto.link,
       winner: dto.winner,
-    }
-    return await this.prisma.match.create({ data }).catch(handleError)
+      drawNumbers: dto.drawNumbers,
+    };
+    return await this.prisma.match.create({ data }).catch(handleError);
   }
 
   async findOne(id: string) {
