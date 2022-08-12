@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { HttpException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -8,22 +9,21 @@ import { UpdatePlayerDto } from './dto/update-player.dto';
 
 @Injectable()
 export class PlayerService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly PrismaClient: PrismaService) {}
     async create(dto: CreatePlayerDto) {
 
       const data: Prisma.PlayerCreateInput = {
-        playerName: dto.playerName,
+        name: dto.name,
         avatar: dto.avatar,
         score: dto.score,
         isHost: dto.isHost,
-        match: {connect: {id: dto.matchId}}
       }
-      return await this.prisma.player.create({ data }).catch(handleError)
+      return await this.PrismaClient.player.create({ data }).catch(handleError)
     }
 
 
     async findOne(id: string) {
-      const record = await this.prisma.player.findUnique({ where: { id } });
+      const record = await this.PrismaClient.player.findUnique({ where: { id } });
   
       notFoundError(record, id);
       return record;
@@ -33,14 +33,13 @@ export class PlayerService {
       await this.findOne(id);
   
       const data: Prisma.PlayerUpdateInput = {
-        playerName: dto.playerName,
+        name: dto.name,
         avatar: dto.avatar,
         score: dto.score,
         isHost: dto.isHost,
-        match: {connect: {id: dto.matchId}}
       };
   
-      return this.prisma.player
+      return this.PrismaClient.player
         .update({
           where: { id },
           data,
@@ -51,7 +50,7 @@ export class PlayerService {
     async remove(id: string) {
       await this.findOne(id);
   
-      await this.prisma.player.delete({
+      await this.PrismaClient.player.delete({
         where: { id },
       });
       throw new HttpException('Player deleted', 204);
