@@ -15,6 +15,11 @@ model Player {
     score       Int
     isHost      Boolean
 
+    cards       Cards[]
+
+    match       Match @relation(fields: [matchId], references: [id])
+    matchId     String  @map("match_id")
+
     createdAt DateTime @default(now()) @map("created_at")
     updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -30,6 +35,10 @@ model Match {
   link            String
   winner          String
 
+  players         Player[]
+  drawNumbers     DrawNumbers[]
+
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -37,7 +46,22 @@ model Match {
 
 model Cards {
   id String @id @default(uuid())
+  
   numbers                     String
   bingoPossibilities          String
+
+
+  player       Player   @relation(fields: [playerId], references: [id])
+  playerId     String   @map("player_id")
   
+}
+
+model DrawNumbers {
+  id String @id @default(uuid())
+  
+  drawNumbers  String
+  actualDraw   String
+
+  match       Match   @relation(fields: [matchId], references: [id])
+  matchId     String  @map("match_id")
 }
