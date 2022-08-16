@@ -10,4 +10,11 @@ export class CreateCardDto {
     })
     numbers: string[]
 
+@IsUUID()
+  @ApiProperty({
+    description: 'Player ID',
+    example: '88abbad8-1b0e-417a-ae5e-0317b0cff8b2',
+  })
+  playerId: string;
+
 }

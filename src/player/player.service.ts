@@ -17,6 +17,11 @@ export class PlayerService {
         avatar: dto.avatar,
         score: dto.score,
         isHost: dto.isHost,
+        match:{
+          connect:{
+            id: dto.matchId,
+          }
+        }
       }
       return await this.PrismaClient.player.create({ data }).catch(handleError)
     }

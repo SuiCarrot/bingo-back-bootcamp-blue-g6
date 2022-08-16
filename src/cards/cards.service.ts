@@ -14,6 +14,11 @@ export class CardsService {
     return await this.prisma.cards.create({
       data:{
         numbers: cardNumbers.numbers,
+        player:{
+          connect:{
+            id: dto.playerId,
+          }
+        }
       }
     })
   }

@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsUUID } from 'class-validator';
 
 export class CreatePlayerDto {
   @ApiProperty({
@@ -24,4 +25,11 @@ export class CreatePlayerDto {
     example: false,
   })
   isHost: boolean;
+
+  @IsUUID()
+  @ApiProperty({
+    description: 'Match ID.',
+    example: '88abbad8-1b0e-417a-ae5e-0317b0cff8b2',
+  })
+  matchId: string;
 }
