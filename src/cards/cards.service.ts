@@ -11,41 +11,20 @@ import { connect } from 'http2';
 
 @Injectable()
 export class CardsService {
+  numbers: string[];
 
   constructor(private readonly prisma: PrismaService){}
-/*   async create(dto: CreateCardDto): Promise<Cards> {
-    let 
-      numero = new Numbers(),
-      cardNumber = numero.cardNumbers()
 
-    const data: Prisma.CardsCreateInput = {
-      numbers: cardNumber,
-      bingoPossibilities: numero.bingoPossibilities(cardNumber),
-    }
-    return await this.prisma.cards.create({data}).catch(handleError);
-  } */
 
   async create(dto: CreateCardDto) {
 
-    let 
-      numero = new Numbers(),
-      cardNumber = numero.cardNumbers()
-
     return await this.prisma.cards.create({
       data:{
-        numbers: cardNumber,
-        bingoPossibilities: numero.bingoPossibilities(cardNumber),
-        player: {
-          select: {
-            id: true,
-            name: true,
-            _count: { select: { player: true } },
-          },
-        },
+        numbers: dto.numbers,
+        bingoPossibilities: dto.bingoPossibilities,
       }
     })
   }
-
 
   async findOne(id: string) {
     const record = await this.prisma.cards.findUnique({ where: { id } });
