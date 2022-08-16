@@ -17,6 +17,11 @@ export class DrawnnumbersController {
     return this.drawnnumbersService.findOne(+id);
   }
 
+  @Get(':id')
+  draw(@Param('id') id: string) {
+    return this.drawnnumbersService.findOne(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateDrawnnumberDto: UpdateDrawnnumberDto) {
     return this.drawnnumbersService.update(+id, updateDrawnnumberDto);
