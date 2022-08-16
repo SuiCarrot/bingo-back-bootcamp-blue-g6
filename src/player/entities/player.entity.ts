@@ -5,6 +5,5 @@ export class Player {
   avatar: string;
   score: number;
   isHost: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+  matchId: string;
 }
