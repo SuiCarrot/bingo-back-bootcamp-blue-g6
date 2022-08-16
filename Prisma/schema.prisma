@@ -13,6 +13,12 @@ model Player {
   avatar    String
   score     Int
   isHost    Boolean
+
+  cards     Cards[]
+
+  match     Match  @relation(fields: [matchId], references: [id])
+  matchId   String  @map("match_id")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 }
@@ -25,18 +31,24 @@ model Match {
   numberOfRounds Int
   link           String
   winner         String
+
+  player         Player[]
+
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")
 }
 
 model Cards {
   id                 String   @id @default(uuid())
-  numbers            Json
-  bingoPossibilities Json
+  numbers            String[]
+
+  player     Player  @relation(fields: [playerId], references: [id])
+  playerId   String  @map("player_id")
 }
 
-model DrawNumbers {
-  id          String   @id @default(uuid())
-  drawNumbers Json
-  actualDraw  Json
+model DrawnNumbers {
+  id            String   @id @default(uuid())
+  drawnNumbers  String[]
+  actualNumber  Int
+  lastNumbers    String[]
 }

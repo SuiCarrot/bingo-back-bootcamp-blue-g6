@@ -1,27 +1,19 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { Cards } from '../types/cards';
-import { type } from 'os';
+import Card from 'src/Classes/Card';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Numbers } from 'src/services/numbers';
-import { handleError } from 'src/utils/handle-error';
 import { notFoundError } from 'src/utils/not-found';
 import { CreateCardDto } from './dto/create-card.dto';
-import { connect } from 'http2';
 
 @Injectable()
 export class CardsService {
-  numbers: string[];
-
   constructor(private readonly prisma: PrismaService){}
 
-
-  async create(dto: CreateCardDto) {
-
+  async create(dto: CreateCardDto) {   
+    let cardNumbers = new Card()
+    
     return await this.prisma.cards.create({
       data:{
-        numbers: dto.numbers,
-        bingoPossibilities: dto.bingoPossibilities,
+        numbers: cardNumbers.numbers,
       }
     })
   }

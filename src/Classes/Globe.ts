@@ -15,6 +15,16 @@ export default class Globe{
         this.drawnNumbers.push(...drawnNumber)
         this.remainingNumbers = this.remainingNumbers.slice(0, max)
         
-        return drawnNumber[0]
+        return drawnNumber[drawnNumber.length-1]
+    }
+
+    lastNumbers(drawnNumbers: string[]){
+        let 
+            lastNumbers = [],
+            min = drawnNumbers.length - 6
+
+        lastNumbers.push(drawnNumbers.slice(min, drawnNumbers.length))
+
+        return lastNumbers
     }
 }

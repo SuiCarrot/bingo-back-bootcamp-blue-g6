@@ -8,6 +8,4 @@ export class Match {
     numberOfRounds?: Number;
     link?: String;
     winner?: String;
-    createdAt?: Date;
-    updatedAt?: Date;
 }
