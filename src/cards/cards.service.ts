@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import Card from 'src/Classes/Card';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { notFoundError } from 'src/utils/not-found';
@@ -23,6 +23,17 @@ export class CardsService {
     })
   }
 
+  async findAll() {
+    const list = await this.prisma.cards.findMany();
+
+    if (list.length === 0) {
+    throw new NotFoundException(
+      "There's no tables of numbers created yet."
+    )};
+
+    return list
+  }
+
   async findOne(id: string) {
     const record = await this.prisma.cards.findUnique({ where: { id } });
 
@@ -35,6 +46,7 @@ export class CardsService {
     await this.prisma.cards.delete({
       where: { id },
     })
-    throw new HttpException('Match deleted', 204);
+    return new HttpException('Match deleted', 204);
+
   }
 }

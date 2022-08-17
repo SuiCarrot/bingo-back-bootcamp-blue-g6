@@ -18,6 +18,14 @@ export class PlayerController {
     return this.playerService.create(createPlayerDto);
   }
 
+  @Get()
+  @ApiOperation({
+    summary: 'Get all the players.',
+  })
+  findAll() {
+    return this.playerService.findAll();
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Find one player by ID.',

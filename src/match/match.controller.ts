@@ -18,6 +18,14 @@ export class MatchController {
     return this.matchService.create(createMatchDto);
   }
 
+  @Get()
+  @ApiOperation({
+    summary: 'Get all the matchs.',
+  })
+  findAll() {
+    return this.matchService.findAll();
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Find one match by ID.',

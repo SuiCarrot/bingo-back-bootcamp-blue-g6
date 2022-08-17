@@ -22,12 +22,24 @@ export class MatchService {
     return await this.prisma.match.create({ data }).catch(handleError)
   }
 
+  async findAll() {
+    const list = await this.prisma.match.findMany();
+
+    if (list.length === 0) {
+    throw new NotFoundException(
+      "There's no tables of numbers created yet."
+    )};
+
+    return list
+  }
+
   async findOne(id: string) {
     const record = await this.prisma.match.findUnique({ where: { id } });
 
     notFoundError(record, id);
     return record;
   }
+
 
   async update(id: string, dto: UpdateMatchDto): Promise<Match> {
     await this.findOne(id);
@@ -55,6 +67,6 @@ export class MatchService {
     await this.prisma.match.delete({
       where: { id },
     });
-    throw new HttpException('Match deleted', 204);
+    return new HttpException('Match deleted', 204);
   }
 }
