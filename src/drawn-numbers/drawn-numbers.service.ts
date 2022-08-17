@@ -1,5 +1,6 @@
 import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { CardsService } from 'src/cards/cards.service';
+import Card from 'src/Classes/Card';
 import Globe from 'src/Classes/Globe';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { notFoundError } from 'src/utils/not-found';
@@ -25,10 +26,21 @@ export class DrawnNumbersService {
     });
   }
 
-  async checkVictory(id: string){
-    let card = await this.card.findOne(id)
+  async checkVictory(cardId: string, drawnNumbersId: string){
+    let 
+      card = await this.card.findOne(cardId),
+      table = await this.findOne(drawnNumbersId),
+      
+      data = {
+        card,
+        table
+      },
+      
+      cardClass = new Card()
 
-    return card
+      if(cardClass.checkVictory(table.drawnNumbers, card.numbers)) return true
+          
+    return false
   }
 
   async findAll() {
