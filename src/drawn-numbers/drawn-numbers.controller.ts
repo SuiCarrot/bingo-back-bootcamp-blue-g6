@@ -36,7 +36,7 @@ export class DrawnNumbersController {
 
   @Get('checkVictory/:id')
   @ApiOperation({
-    summary: 'Draw one number and add to the already drawn numbers.',
+    summary: 'in construction, DON`T USE',
   })
   checkVictory(@Param('id') id: string) {
     return this.drawnNumbersService.checkVictory(id);

@@ -1,4 +1,5 @@
 import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { CardsService } from 'src/cards/cards.service';
 import Globe from 'src/Classes/Globe';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { notFoundError } from 'src/utils/not-found';
@@ -8,7 +9,7 @@ import { UpdateDrawnNumberDto } from './dto/update-drawn-number.dto';
 @Injectable()
 export class DrawnNumbersService {
 
-  constructor (private readonly prisma: PrismaService){}
+  constructor (private readonly prisma: PrismaService, private readonly card: CardsService){ }
 
   async create(dto: CreateDrawnNumberDto) {
     let 
@@ -25,7 +26,9 @@ export class DrawnNumbersService {
   }
 
   async checkVictory(id: string){
+    let card = await this.card.findOne(id)
 
+    return card
   }
 
   async findAll() {
