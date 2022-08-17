@@ -48,7 +48,8 @@ model Cards {
 
 model DrawnNumbers {
   id            String   @id @default(uuid())
-  drawnNumbers  String[]
+  drawnNumbers  Int[]
   actualNumber  Int
-  lastNumbers    String[]
+  lastNumbers   Int[]
+  baseNumbers   Int[]
 }

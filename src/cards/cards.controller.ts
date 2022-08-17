@@ -18,6 +18,14 @@ export class CardsController {
     return this.cardsService.create(createCardDto);
   }
 
+  @Get()
+  @ApiOperation({
+    summary: 'Get all the cards.',
+  })
+  findAll() {
+    return this.cardsService.findAll();
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Find one card by ID.',

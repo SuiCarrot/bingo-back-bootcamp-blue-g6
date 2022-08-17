@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { handleError } from 'src/utils/handle-error';
@@ -34,6 +34,17 @@ export class PlayerService {
       return record;
     }
 
+    async findAll() {
+      const list = await this.PrismaClient.player.findMany();
+  
+      if (list.length === 0) {
+      throw new NotFoundException(
+        "There's no tables of numbers created yet."
+      )};
+  
+      return list
+    }
+
     async update(id: string, dto: UpdatePlayerDto) {
       await this.findOne(id);
   
@@ -58,6 +69,7 @@ export class PlayerService {
       await this.PrismaClient.player.delete({
         where: { id },
       });
-      throw new HttpException('Player deleted', 204);
+      return new HttpException('Match deleted', 204);
+
     }
 }
