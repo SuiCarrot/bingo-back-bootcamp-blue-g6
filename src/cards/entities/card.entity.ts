@@ -1,6 +1,6 @@
 
 export class Card {
     id: string;
-    numbers: string[];
+    numbers: number[];
     playerId: string;
 }

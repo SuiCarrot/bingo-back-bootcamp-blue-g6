@@ -8,7 +8,7 @@ export class CreateCardDto {
         description: 'Numbers of this card',
         example: []
     })
-    numbers: string[]
+    numbers: number[]
 
 @IsUUID()
   @ApiProperty({

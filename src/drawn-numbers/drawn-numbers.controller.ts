@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { DrawnNumbersService } from './drawn-numbers.service';
 import { CreateDrawnNumberDto } from './dto/create-drawn-number.dto';
@@ -34,12 +34,15 @@ export class DrawnNumbersController {
     return this.drawnNumbersService.findOne(id);
   }
 
-  @Get('checkVictory/:id')
+  @Get('checkVictory/check')
   @ApiOperation({
-    summary: 'Draw one number and add to the already drawn numbers.',
+    summary: 'in construction, DON`T USE',
   })
-  checkVictory(@Param('id') id: string) {
-    return this.drawnNumbersService.checkVictory(id);
+  checkVictory(
+    @Query('cardId') cardId: string,
+    @Query('drawnNumbersId') drawnNumbersId: string
+  ) {
+    return this.drawnNumbersService.checkVictory(cardId, drawnNumbersId);
   }
 
   @Patch(':id')

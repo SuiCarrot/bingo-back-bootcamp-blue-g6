@@ -40,7 +40,7 @@ model Match {
 
 model Cards {
   id                 String   @id @default(uuid())
-  numbers            String[]
+  numbers            Int[]
 
   player     Player  @relation(fields: [playerId], references: [id])
   playerId   String  @map("player_id")
