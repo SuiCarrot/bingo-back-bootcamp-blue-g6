@@ -36,7 +36,7 @@ export class DrawnNumbersController {
 
   @Get('checkVictory/check')
   @ApiOperation({
-    summary: 'in construction, DON`T USE',
+    summary: 'Check if a card and an Array of drawnNumbers check to bingo.',
   })
   checkVictory(
     @Query('cardId') cardId: string,
