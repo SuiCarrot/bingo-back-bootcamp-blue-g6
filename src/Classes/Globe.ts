@@ -11,7 +11,6 @@ export default class Globe{
         drawnNumber = remainingNumbers.sort(() => Math.random() - 0.5).slice(-1),
         max = remainingNumbers.length - 1
         
-        console.log("drawnNumber", drawnNumber)
 
         drawnNumbers.push(...drawnNumber)
         remainingNumbers = remainingNumbers.splice(0, max)
@@ -23,9 +22,6 @@ export default class Globe{
                 drawnNumbers,
                 draw
         }
-
-        console.log("data", data)
-        console.log("remaingnumbers length", remainingNumbers.length)
         return data
     }
 
