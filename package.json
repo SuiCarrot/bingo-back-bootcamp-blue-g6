@@ -10,7 +10,7 @@
     "prebuild": "rimraf dist",
     "build": "npx prisma generate --schema=./Prisma/schema.prisma && npx prisma db pull && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "npx prisma generate && nest start",
+    "start": "npx prisma generate --schema=./Prisma/schema.prisma && npx prisma db pull && nest build",
     "dev": "nest start --watch"
   },
   "dependencies": {
