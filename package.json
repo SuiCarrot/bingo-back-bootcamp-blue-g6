@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
-    "deploy": "npm run build && npm run start"
+    "deploy": "npm run build && npm run start",
+    "heroku-postbuild": "NODE_ENV=dev npm install --omit --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
