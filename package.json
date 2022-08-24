@@ -8,10 +8,11 @@
   "scripts": {
     "local": "npx prisma generate && nest start --watch",
     "prebuild": "rimraf dist",
-    "build": "npx prisma generate --schema=./Prisma/schema.prisma && nest build",
+    "build": "npx prisma generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest build",
-    "dev": "nest start --watch"
+    "start": "nest start",
+    "dev": "nest start --watch",
+    "deploy": "npm run build && npm run start"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
