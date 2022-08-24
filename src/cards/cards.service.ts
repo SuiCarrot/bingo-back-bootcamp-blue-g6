@@ -41,6 +41,24 @@ export class CardsService {
     return record;
   }
 
+  async createCards(qtty: number, playerId: string) {
+    const 
+      qtdade = qtty,
+      cards=[],
+      data = {
+        "numbers": [],
+        "playerId": `${playerId}`
+      }
+
+    for(let i=0; i<qtdade; i++){
+      let card = await this.create(data)
+
+      cards.push(card)
+    }
+
+    return cards
+  }
+
   async remove(id: string) {
     await this.findOne(id);
     await this.prisma.cards.delete({

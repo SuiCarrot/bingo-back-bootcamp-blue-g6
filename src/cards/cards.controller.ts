@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CardsService } from './cards.service';
 import { CreateCardDto } from './dto/create-card.dto';
@@ -33,6 +33,17 @@ export class CardsController {
   findOne(@Param('id') id: string) {
     return this.cardsService.findOne(id);
   }
+
+  @Post('player-cards')
+  @ApiOperation({
+    summary: 'Create the cards for one player.',
+  })  
+  createCards(
+    @Query('qtty') qtty: number,
+    @Query('playerId') playerId: string
+    ) {
+      return this.cardsService.createCards(qtty, playerId);
+    }
 
   @Delete(':id')
   @ApiOperation({
